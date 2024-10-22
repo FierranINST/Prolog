@@ -55,5 +55,6 @@ totient(M, Phi) :- M > 1, totient_acc(M, M, 0, Phi).
 
 totient_acc(_, 0, Acc, Acc).
 totient_acc(M, K, Acc, Phi) :- K > 0, coprime(M, K), Acc1 is Acc + 1, K1 is K - 1, totient_acc(M, K1, Acc1, Phi).
-totient_acc(M, K,
+totient_acc(M, K, Acc, Phi) :- K > 0, \+ coprime(M, K), K1 is K - 1, totient_acc(M, K1, Acc, Phi).
+% ----------------------------------------------
 
