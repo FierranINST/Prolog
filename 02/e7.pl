@@ -60,3 +60,8 @@ my_flatten([H|T], [H|FT]) :-
     \+ is_list(H),
     my_flatten(T, FT).
 % ----------------------------------------------
+main :-
+    NestedList = [1, [2, 3], [4, [5, 6]], 7],
+    my_flatten(NestedList, Flat),
+    format('La lista aplana: ~w.~n', [Flat]).
+

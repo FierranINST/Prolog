@@ -38,3 +38,8 @@ list_length([_|T], N) :-
     list_length(T, N1),
     N is N1 + 1.
 % ----------------------------------------------
+main :-
+    List = [a, b, c, d, e],
+    list_length(List, N),
+    format('La longitud de la lista es: ~w~n', [N]).
+

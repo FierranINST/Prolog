@@ -58,3 +58,8 @@ modify([[1,X]|T], [X|R]) :- modify(T, R).
 % Si hay más de un elemento, mantén el formato (N, X).
 modify([[N,X]|T], [[N,X]|R]) :- N > 1, modify(T, R).
 
+main :-
+    List = [a, a, b, b, c, d, e, e, e, f],
+    encode_modified(List, Encoded),
+    format('La lista codificada modificada es: ~w.~n', [Encoded]).
+

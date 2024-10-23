@@ -42,3 +42,9 @@ element_at(X, [_|T], K) :-
     K1 is K - 1,
     element_at(X, T, K1).
 % ----------------------------------------------
+main :-
+    List = [a, b, c, d, e],
+    K = 3,
+    element_at(X, List, K),
+    format('El ~w-ésimo elemento de la lista es: ~w~n', [K, X]).
+

@@ -40,3 +40,7 @@ penultimate(X, [X, _]).
 penultimate(X, [_|T]) :-
     penultimate(X, T).
 % ----------------------------------------------
+main :-
+    penultimate(X, [a, b, c, d]),
+    writeln(X).
+

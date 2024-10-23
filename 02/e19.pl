@@ -40,3 +40,10 @@ rotate_left(L, 0, L).
 % Caso recursivo: divide la lista en dos partes y las intercambia.
 rotate_left([H|T], N, R) :- N > 0, append(T, [H], L), N1 is N - 1, rotate_left(L, N1, R).
 
+main :-
+    ListaOriginal = [a, b, c, d, e, f, g],
+    N = 2,  % número de posiciones a rotar
+    rotate(ListaOriginal, N, ListaRotada),
+    format('La lista original es: ~w~n', [ListaOriginal]),
+    format('La lista rotada ~w lugares a la izquierda es: ~w~n', [N, ListaRotada]).
+

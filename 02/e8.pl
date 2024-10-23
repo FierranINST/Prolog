@@ -55,3 +55,7 @@ compress([X,Y|T], [X|R]) :-
     X \= Y,
     compress([Y|T], R).
 % ----------------------------------------------
+main :-
+    compress([a, a, b, b, c, c, d], R),
+    writeln(R).
+

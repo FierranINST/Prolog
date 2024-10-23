@@ -33,3 +33,11 @@ slice([H|_], 1, 1, [H]).
 slice([H|T], 1, K, [H|R]) :- K > 1, K1 is K - 1, slice(T, 1, K1, R).
 slice([_|T], I, K, R) :- I > 1, I1 is I - 1, K1 is K - 1, slice(T, I1, K1, R).
 
+main :-
+    ListaOriginal = [a, b, c, d, e, f, g, h],
+    I = 3,  % índice inicial
+    K = 4,  % longitud de la porción
+    slice(ListaOriginal, I, K, Porcion),
+    format('La lista original es: ~w~n', [ListaOriginal]),
+    format('La porción desde el índice ~w con longitud ~w es: ~w~n', [I, K, Porcion]).
+

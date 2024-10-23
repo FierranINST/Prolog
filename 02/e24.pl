@@ -36,3 +36,9 @@
 % Extrae N números aleatorios de un rango dado.
 lotto(N, M, L) :- range(1, M, R), rnd_select(R, N, L).
 
+main :-
+    N = 6,           % número de elementos a seleccionar
+    M = 49,          % límite superior del rango
+    lotto(N, M, Resultado),
+    format('Números seleccionados aleatorios: ~w~n', [Resultado]).
+

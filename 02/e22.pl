@@ -35,3 +35,9 @@
 range(I, I, [I]).
 range(I, K, [I|R]) :- I < K, I1 is I + 1, range(I1, K, R).
 
+main :-
+    Inicio = 1,  % valor inicial del rango
+    Fin = 5,     % valor final del rango
+    range(Inicio, Fin, ListaResultado),
+    format('Rango de ~d a ~d: ~w~n', [Inicio, Fin, ListaResultado]).
+

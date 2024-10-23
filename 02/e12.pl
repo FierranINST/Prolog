@@ -46,5 +46,9 @@
 decode([], []).
 decode([[N,X]|T], R) :- decode(T, R1), expand(X, N, E), append(E, R1, R).
 
-%
+main :-
+    Encoded = [[2, a], [1, b], [3, c], [1, d], [2, e]],
+    decode(Encoded, Decoded),
+    format('La lista decodificada es: ~w.~n', [Decoded]).
+
 

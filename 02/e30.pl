@@ -35,3 +35,12 @@
 has_factor(N, L) :- N mod L =:= 0.
 has_factor(N, L) :- L * L < N, L2 is L + 2, has_factor(N, L2).
 
+main :-
+    write('Introduce un número entero: '),  % Solicita al usuario un número
+    read(Number),                          % Lee el número introducido
+    ( has_factor(Number, 2) ->
+        format('~w tiene factores.~n', [Number])
+    ;
+        format('~w no tiene factores.~n', [Number])
+    ).
+

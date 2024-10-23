@@ -33,3 +33,11 @@
 split(L, 0, [], L).
 split([H|T], N, [H|L1], L2) :- N > 0, N1 is N - 1, split(T, N1, L1, L2).
 
+main :-
+    ListaOriginal = [a, b, c, d, e, f, g, h],
+    N = 4,
+    split(ListaOriginal, N, Parte1, Parte2),
+    format('La lista original es: ~w~n', [ListaOriginal]),
+    format('La primera parte (longitud ~w) es: ~w~n', [N, Parte1]),
+    format('La segunda parte es: ~w~n', [Parte2]).
+

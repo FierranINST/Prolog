@@ -42,3 +42,7 @@ my_last(X, [X]).
 % Caso recursivo: ignora el primer elemento de la lista y sigue evaluando.
 my_last(X, [_|Tail]) :-
     my_last(X, Tail).
+
+main :-
+    my_last(X, [a, b, c, d]),  
+    writeln(X).  % Imprime el último elemento.

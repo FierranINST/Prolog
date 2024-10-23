@@ -32,3 +32,8 @@
 % Genera una permutación aleatoria de los elementos de una lista.
 rnd_permu(L, P) :- length(L, Len), rnd_select(L, Len, P).
 
+main :-
+    Lista = [a, b, c, d, e],  % lista de entrada
+    rnd_permu(Lista, Permutacion),
+    format('Permutación aleatoria: ~w~n', [Permutacion]).
+

@@ -39,3 +39,9 @@ dupli([], []).
 % Caso recursivo: duplica el primer elemento y continúa con el resto.
 dupli([H|T], [H,H|R]) :- dupli(T, R).
 
+main :-
+    ListaOriginal = [a, b, c, d],
+    dupli(ListaOriginal, Duplicada),
+    format('La lista duplicada es: ~w.~n', [Duplicada]).
+
+

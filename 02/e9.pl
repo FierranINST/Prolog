@@ -71,3 +71,7 @@ transfer(X, [Y|Ys], [], [Y|Ys]) :-
 transfer(X, [X|Xs], [X|Ys], Rest) :-
     transfer(X, Xs, Ys, Rest).
 % ----------------------------------------------
+main :-
+    pack([a, a, b, b, c, c, d], R),
+    writeln(R).
+

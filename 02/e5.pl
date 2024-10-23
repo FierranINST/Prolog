@@ -42,3 +42,8 @@ reverse_list([H|T], Acc, R) :-
 reverse_list(L, R) :-
     reverse_list(L, [], R).
 % ----------------------------------------------
+main :-
+    List = [1, 2, 3, 4, 5],
+    reverse_list(List, Reversed),
+    format('La lista invertida es: ~w~n', [Reversed]).
+

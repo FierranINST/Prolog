@@ -33,3 +33,9 @@
 rnd_select(_, 0, []).
 rnd_select(L, N, [X|R]) :- length(L, Len), random(1, Len, I), element_at(X, L, I), delete(L, X, L1), N1 is N - 1, rnd_select(L1, N1, R).
 
+main :-
+    Lista = [a, b, c, d, e, f, g, h],  % lista de elementos
+    N = 3,                             % número de elementos a seleccionar
+    rnd_select(Lista, N, Resultado),
+    format('Elementos seleccionados aleatorios: ~w~n', [Resultado]).
+

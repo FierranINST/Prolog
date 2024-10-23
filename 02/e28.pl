@@ -41,3 +41,8 @@
 % Ordena una lista de listas de acuerdo con la frecuencia de la longitud de las sublistas.
 length_frequency(L, F) :- map_list_to_pairs(length, L, P), msort(P, SP), encode(SP, F).
 
+main :-
+    Lista = [[a, b, c], [d, e], [f], [g, h, i, j], [k, l]],  % lista de listas de entrada
+    length_frequency(Lista, Frecuencia),
+    format('Frecuencia de longitudes: ~w~n', [Frecuencia]).
+

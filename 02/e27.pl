@@ -38,3 +38,8 @@
 % Ordena una lista de listas de acuerdo con la longitud de las sublistas.
 lsort(L, S) :- map_list_to_pairs(length, L, P), keysort(P, SP), pairs_values(SP, S).
 
+main :-
+    Lista = [[a, b, c], [d, e], [f], [g, h, i, j]],  % lista de listas de entrada
+    lsort(Lista, ListaOrdenada),
+    format('Lista ordenada por longitud: ~w~n', [ListaOrdenada]).
+

@@ -47,3 +47,9 @@ drop([_|T], 1, N, R) :- drop(T, N, N, R).
 % Caso recursivo: disminuye el contador y conserva el elemento.
 drop([H|T], K, N, [H|R]) :- K > 1, K1 is K - 1, drop(T, K1, N, R).
 
+main :-
+    ListaOriginal = [a, b, c, d, e, f, g, h],
+    N = 3,
+    drop(ListaOriginal, N, Resultado),
+    format('La lista después de eliminar cada ~w-ésimo elemento es: ~w.~n', [N, Resultado]).
+

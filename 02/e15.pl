@@ -46,3 +46,9 @@ dupli([H|T], N, R) :- duplicate(H, N, D), dupli(T, N, R1), append(D, R1, R).
 duplicate(_, 0, []).
 duplicate(X, N, [X|R]) :- N > 0, N1 is N - 1, duplicate(X, N1, R).
 
+main :-
+    ListaOriginal = [a, b, c],
+    N = 3,
+    dupli(ListaOriginal, N, Duplicada),
+    format('La lista duplicada es: ~w.~n', [Duplicada]).
+

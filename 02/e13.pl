@@ -56,3 +56,9 @@ count(_, [], 0, []).
 count(X, [X|Xs], N, Rest) :- count(X, Xs, N1, Rest), N is N1 + 1.
 count(X, [Y|Ys], 0, [Y|Ys]) :- X \= Y.
 
+
+main :-
+    ListaOriginal = [a, a, b, b, b, c, c, c, c, d],
+    encode_direct(ListaOriginal, Codificada),
+    format('La lista codificada es: ~w.~n', [Codificada]).
+

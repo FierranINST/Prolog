@@ -33,3 +33,11 @@
 remove_at(X, [X|T], 1, T).
 remove_at(X, [H|T], N, [H|R]) :- N > 1, N1 is N - 1, remove_at(X, T, N1, R).
 
+main :-
+    ListaOriginal = [a, b, c, d, e, f, g],
+    Posicion = 3,  % posición del elemento a eliminar
+    remove_at(ElementoEliminado, ListaOriginal, Posicion, ListaResultado),
+    format('Lista original: ~w~n', [ListaOriginal]),
+    format('Elemento eliminado: ~w~n', [ElementoEliminado]),
+    format('Lista después de eliminar el elemento en la posición ~d: ~w~n', [Posicion, ListaResultado]).
+

@@ -74,3 +74,8 @@ transform([[X|Xs]|Ys], [[N,X]|Zs]) :-
     length([X|Xs], N),
     transform(Ys, Zs).
 % ----------------------------------------------
+main :-
+    List = [a, a, b, b, b, c, c, c, c, d, e, e],
+    encode(List, Encoded),
+    format('La lista codificada es: ~w.~n', [Encoded]).
+

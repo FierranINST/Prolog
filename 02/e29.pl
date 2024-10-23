@@ -41,3 +41,12 @@ is_prime(P) :- P > 3, P mod 2 =\= 0, \+ has_factor(P, 3).
 
 has_factor(N, L) :- N mod L =:= 0.
 has_factor(N, L) :- L * L < N, L2 is L + 2, has_factor(N, L2).
+main :-
+    write('Introduce un número entero: '),  % Solicita al usuario un número
+    read(Number),                          % Lee el número introducido
+    ( is_prime(Number) ->
+        format('~w es un número primo.~n', [Number])
+    ;
+        format('~w no es un número primo.~n', [Number])
+    ).
+

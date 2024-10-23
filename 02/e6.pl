@@ -36,3 +36,11 @@
 palindrome(L) :-
     reverse_list(L, L).
 % ----------------------------------------------
+main :-
+    List = [a, b, c, b, a],
+    (palindrome(List) ->
+        format('La lista ~w es un palíndromo.~n', [List])
+    ;
+        format('La lista ~w no es un palíndromo.~n', [List])
+    ).
+
