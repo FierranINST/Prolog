@@ -46,11 +46,28 @@
 % }
 % ----------------------------------------------
 
-% -------- Código en Prolog --------------------
-huffman(Fs, Hs) :- length(Fs, Len), Len > 1, sort(2, @=<, Fs, Sorted), huffman_tree(Sorted, Hs).
+% Genera un árbol de Huffman dado un conjunto de frecuencias.
+% El algoritmo de Huffman se utiliza para la compresión de datos, construyendo un árbol binario óptimo para la codificación.
+huffman(Fs, Hs) :-
+    length(Fs, Len),
+    Len > 1,
+    sort(2, @=<, Fs, Sorted),
+    huffman_tree(Sorted, Hs).
 
 % Caso base para construir el árbol de Huffman.
 huffman_tree([fr(X, _) | []], hc(X, '0')).
 huffman_tree([fr(_, _) | [fr(_, _) | _]], _).
-% ----------------------------------------------
 
+% El árbol vacío es válido
+istree(nil).
+
+% Un árbol no vacío es válido si el subárbol izquierdo y el derecho también son árboles binarios
+istree(t(_, L, R)) :-
+    istree(L),
+    istree(R).
+
+% Función main para probar la generación de un árbol de Huffman a partir de un conjunto de frecuencias.
+main :-
+    Frequencies = [fr(a, 45), fr(b, 13), fr(c, 12), fr(d, 16), fr(e, 9), fr(f, 5)],
+    huffman(Frequencies, HuffmanTree),
+    format('El árbol de Huffman generado es: ~w~n', [HuffmanTree]).

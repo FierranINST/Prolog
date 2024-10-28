@@ -33,12 +33,33 @@
 % ----------------------------------------------
 
 % -------- Código en Prolog --------------------
+
+% Genera una lista con todos los enteros dentro de un rango dado.
+range(I, I, [I]).
+range(I, K, [I|R]) :- I < K, I1 is I + 1, range(I1, K, R).
+
 % Extrae N números aleatorios de un rango dado.
 lotto(N, M, L) :- range(1, M, R), rnd_select(R, N, L).
+
+% Extrae un número dado de elementos aleatorios de una lista.
+rnd_select(_, 0, []).
+rnd_select(L, N, [X|R]) :-
+    length(L, Len),
+    random(1, Len, I),
+    element_at(X, L, I),
+    delete(L, X, L1),
+    N1 is N - 1,
+    rnd_select(L1, N1, R).
+
+% Obtiene el elemento en la posición I de la lista L.
+element_at(X, [X|_], 1).  % El primer elemento es en la posición 1
+element_at(X, [_|T], I) :- 
+    I > 1, 
+    I1 is I - 1, 
+    element_at(X, T, I1).
 
 main :-
     N = 6,           % número de elementos a seleccionar
     M = 49,          % límite superior del rango
     lotto(N, M, Resultado),
     format('Números seleccionados aleatorios: ~w~n', [Resultado]).
-

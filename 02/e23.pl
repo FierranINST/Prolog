@@ -29,13 +29,26 @@
 % ----------------------------------------------
 
 % -------- Código en Prolog --------------------
+
 % Extrae un número dado de elementos aleatorios de una lista.
 rnd_select(_, 0, []).
-rnd_select(L, N, [X|R]) :- length(L, Len), random(1, Len, I), element_at(X, L, I), delete(L, X, L1), N1 is N - 1, rnd_select(L1, N1, R).
+rnd_select(L, N, [X|R]) :-
+    length(L, Len),
+    random(1, Len, I),
+    element_at(X, L, I),
+    delete(L, X, L1),
+    N1 is N - 1,
+    rnd_select(L1, N1, R).
+
+% Obtiene el elemento en la posición I de la lista L.
+element_at(X, [X|_], 1).  % El primer elemento es en la posición 1
+element_at(X, [_|T], I) :- 
+    I > 1, 
+    I1 is I - 1, 
+    element_at(X, T, I1).
 
 main :-
     Lista = [a, b, c, d, e, f, g, h],  % lista de elementos
     N = 3,                             % número de elementos a seleccionar
     rnd_select(Lista, N, Resultado),
     format('Elementos seleccionados aleatorios: ~w~n', [Resultado]).
-

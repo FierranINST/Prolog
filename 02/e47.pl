@@ -19,7 +19,23 @@
 % }
 % ----------------------------------------------
 
-% -------- Código en Prolog --------------------
-divide(N, N1, N2) :- N1 is N // 2, N2 is N - N1.
-% ----------------------------------------------
+% Comprueba si un árbol binario es simétrico.
+% Un árbol es simétrico si sus subárboles izquierdo y derecho son espejos entre sí.
+symmetric(nil).
+symmetric(t(_, L, R)) :- mirror(L, R).
+
+% Verifica si un árbol es el espejo de otro.
+mirror(nil, nil).
+mirror(t(_, L1, R1), t(_, L2, R2)) :- 
+    mirror(L1, R2), 
+    mirror(R1, L2).
+
+% Función main para probar si un árbol binario es simétrico.
+main :-
+    % Ejemplo de árbol simétrico.
+    Tree = t('x', t('x', nil, t('x', nil, nil)), t('x', t('x', nil, nil), nil)),
+    (symmetric(Tree) ->
+        format('El árbol es simétrico: ~w~n', [Tree])
+    ;
+        format('El árbol no es simétrico: ~w~n', [Tree])).
 

@@ -41,14 +41,17 @@
 % ----------------------------------------------
 
 % -------- Código en Prolog --------------------
-% Decodifica una lista codificada mediante Run-Length.
-% Expande cada par (N, X) en una lista con N elementos X.
-decode([], []).
-decode([[N,X]|T], R) :- decode(T, R1), expand(X, N, E), append(E, R1, R).
 
+% Expande cada par (N, X) en una lista con N elementos X.
+expand(_, 0, []).
+expand(X, N, [X|R]) :- N > 0, N1 is N - 1, expand(X, N1, R).
+
+% Decodifica una lista codificada mediante Run-Length.
+decode([], []).
+decode([[N, X]|T], R) :- decode(T, R1), expand(X, N, E), append(E, R1, R).
+
+% ----------------------------------------------
 main :-
     Encoded = [[2, a], [1, b], [3, c], [1, d], [2, e]],
     decode(Encoded, Decoded),
     format('La lista decodificada es: ~w.~n', [Decoded]).
-
-

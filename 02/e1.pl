@@ -43,6 +43,7 @@ my_last(X, [X]).
 my_last(X, [_|Tail]) :-
     my_last(X, Tail).
 
+% Este main contiene las lineas necesarias para ejecutar el programa, cada programa tiene su main
 main :-
     my_last(X, [a, b, c, d]),  
     writeln(X).  % Imprime el último elemento.

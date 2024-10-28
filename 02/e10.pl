@@ -59,23 +59,34 @@
 % ----------------------------------------------
 
 % -------- Código en Prolog --------------------
-% Predicado encode(List, Encoded) que realiza la
-% codificación Run-Length de la lista List.
 
-% Primero agrupa los duplicados consecutivos y luego transforma las sublistas en parejas (N, X).
-encode(L, R) :-
+% Agrupa elementos consecutivos iguales.
+% Agrupa duplicados consecutivos de una lista en sublistas.
+% Caso base: una lista vacía se agrupa como una lista vacía.
+pack([], []).
+% Caso recursivo: transfiere todos los elementos consecutivos iguales a una sublista.
+pack([X|Xs], [[X|Ys]|Zs]) :- transfer(X, Xs, Ys, Rest), pack(Rest, Zs).
+
+% Transfiere los elementos duplicados consecutivos a una sublista.
+transfer(X, [], [], []).
+% Si el siguiente elemento es diferente, termina la transferencia.
+transfer(X, [Y|Ys], [], [Y|Ys]) :- X \= Y.
+% Si el siguiente elemento es igual, agrégalo a la sublista.
+transfer(X, [X|Xs], [X|Ys], Rest) :- transfer(X, Xs, Ys, Rest).
+
+% Codifica una lista mediante la codificación Run-Length.
+encode(L, R) :- 
     pack(L, P),
     transform(P, R).
 
 % Transforma sublistas en parejas (N, X), donde N es la cantidad de elementos.
 transform([], []).
-
 transform([[X|Xs]|Ys], [[N,X]|Zs]) :-
     length([X|Xs], N),
     transform(Ys, Zs).
+
 % ----------------------------------------------
-main :-
+main :- 
     List = [a, a, b, b, b, c, c, c, c, d, e, e],
     encode(List, Encoded),
     format('La lista codificada es: ~w.~n', [Encoded]).
-

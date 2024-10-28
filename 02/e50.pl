@@ -25,7 +25,23 @@
 % }
 % ----------------------------------------------
 
-% -------- Código en Prolog --------------------
-sym_cbal_trees(N, Ts) :- findall(T, (cbal_tree(N, T), symmetric(T)), Ts).
-% ----------------------------------------------
+% Construye un árbol binario equilibrado en altura con una altura dada.
+hbal_tree(0, nil).
+hbal_tree(H, t('x', L, R)) :-
+    H > 0,
+    H1 is H - 1,
+    (H2 is H1 ; H2 is H1 - 1),  % Permitir una diferencia de altura de 0 o 1
+    hbal_tree(H1, L),
+    hbal_tree(H2, R).
 
+% Definición de main para probar hbal_tree/2 con distintas alturas
+main :-
+    writeln('Árbol binario equilibrado de altura 0:'),
+    hbal_tree(0, Tree0), writeln(Tree0),
+    writeln('Árbol binario equilibrado de altura 1:'),
+    hbal_tree(1, Tree1), writeln(Tree1),
+    writeln('Árbol binario equilibrado de altura 2:'),
+    hbal_tree(2, Tree2), writeln(Tree2),
+    writeln('Árbol binario equilibrado de altura 3:'),
+    hbal_tree(3, Tree3), writeln(Tree3),
+    halt.

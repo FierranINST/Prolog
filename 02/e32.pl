@@ -37,6 +37,19 @@
 % ----------------------------------------------
 
 % -------- Código en Prolog --------------------
+% Calcula el máximo común divisor usando el algoritmo de Euclides.
+gcd(X, 0, X) :- X > 0.
+gcd(X, Y, G) :- Y > 0, R is X mod Y, gcd(Y, R, G).
+
+% Dos números son coprimos si su máximo común divisor es 1.
 coprime(X, Y) :- gcd(X, Y, 1).
-% ----------------------------------------------
+
+% Función main para probar si dos números son coprimos.
+main :-
+    X = 35,  % Primer número
+    Y = 64,  % Segundo número
+    (   coprime(X, Y)
+    ->  format('~w y ~w son coprimos.~n', [X, Y])
+    ;   format('~w y ~w no son coprimos.~n', [X, Y])
+    ).
 

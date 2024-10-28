@@ -47,6 +47,27 @@
 % ----------------------------------------------
 
 % -------- Código en Prolog --------------------
+
+% Agrupa elementos consecutivos iguales.
+pack([], []).
+pack([X|Xs], [[X|Ys]|Zs]) :- transfer(X, Xs, Ys, Rest), pack(Rest, Zs).
+
+% Transfiere los elementos duplicados consecutivos a una sublista.
+transfer(X, [], [], []).
+transfer(X, [Y|Ys], [], [Y|Ys]) :- X \= Y.
+transfer(X, [X|Xs], [X|Ys], Rest) :- transfer(X, Xs, Ys, Rest).
+
+% Codifica una lista mediante la codificación Run-Length.
+encode(L, R) :- 
+    pack(L, P),
+    transform(P, R).
+
+% Transforma sublistas en parejas (N, X), donde N es la cantidad de elementos.
+transform([], []).
+transform([[X|Xs]|Ys], [[N,X]|Zs]) :-
+    length([X|Xs], N),
+    transform(Ys, Zs).
+
 % Modifica la codificación Run-Length de una lista.
 % Si un elemento no tiene duplicados, se mantiene sin empaquetar.
 encode_modified(L, R) :- encode(L, Enc), modify(Enc, R).
@@ -58,8 +79,8 @@ modify([[1,X]|T], [X|R]) :- modify(T, R).
 % Si hay más de un elemento, mantén el formato (N, X).
 modify([[N,X]|T], [[N,X]|R]) :- N > 1, modify(T, R).
 
+% ----------------------------------------------
 main :-
     List = [a, a, b, b, c, d, e, e, e, f],
     encode_modified(List, Encoded),
     format('La lista codificada modificada es: ~w.~n', [Encoded]).
-

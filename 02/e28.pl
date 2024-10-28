@@ -38,11 +38,14 @@
 % ----------------------------------------------
 
 % -------- Código en Prolog --------------------
-% Ordena una lista de listas de acuerdo con la frecuencia de la longitud de las sublistas.
-length_frequency(L, F) :- map_list_to_pairs(length, L, P), msort(P, SP), encode(SP, F).
+% Ordena una lista de listas de acuerdo con la longitud de las sublistas.
+lsort(L, S) :-
+    map_list_to_pairs(length, L, P),
+    keysort(P, SP),
+    pairs_values(SP, S).
 
+% Punto de entrada principal.
 main :-
-    Lista = [[a, b, c], [d, e], [f], [g, h, i, j], [k, l]],  % lista de listas de entrada
-    length_frequency(Lista, Frecuencia),
-    format('Frecuencia de longitudes: ~w~n', [Frecuencia]).
-
+    Lista = [[a, b, c], [d, e], [f], [g, h, i, j], [k, l]],  % lista de entrada
+    lsort(Lista, Ordenada),
+    format('Lista ordenada por longitud: ~w~n', [Ordenada]).

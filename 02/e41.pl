@@ -31,8 +31,23 @@
 % }
 % ----------------------------------------------
 
-% -------- Código en Prolog --------------------
-table(A, B, Expr) :- write(A), write(' '), write(B), write(' '), call(Expr), nl, fail.
-table(_, _, _).
-% ----------------------------------------------
+% Define las operaciones lógicas como predicados
+and(true, true).
+and(false, _).
+and(_, false).
 
+% Genera la tabla de verdad para una expresión lógica
+table(A, B, Expr) :-
+    write(A), write(' '), write(B), write(' '),
+    (   call(Expr) -> writeln(true) ; writeln(false) ),
+    fail.
+table(_, _, _).
+
+% Definición de main para llamar a table/3
+main :-
+    writeln('Tabla de verdad para la expresión A and B:'),
+    table(true, true, and(true, true)),
+    table(true, false, and(true, false)),
+    table(false, true, and(false, true)),
+    table(false, false, and(false, false)),
+    halt.

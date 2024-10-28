@@ -71,8 +71,46 @@
 % }
 % ----------------------------------------------
 
-% -------- Código en Prolog --------------------
-goldbach_list(Low, High, L) :- findall([N, P1, P2], (between(Low, High, N), N mod 2 =:= 0, 
-                     goldbach(N, [P1, P2])), L).
-% ----------------------------------------------
+% Verifica si un número es primo.
+is_prime(2) :- !.
+is_prime(N) :-
+    N > 2,
+    N mod 2 =\= 0,
+    \+ has_factor(N, 3).
+
+% Verifica si existe un divisor entre 3 y sqrt(N).
+has_factor(N, F) :-
+    N mod F =:= 0.
+has_factor(N, F) :-
+    F * F < N,
+    F2 is F + 2,
+    has_factor(N, F2).
+
+% Genera una lista de números primos en un rango dado.
+prime_list(Low, High, Primes) :-
+    findall(P, (between(Low, High, P), is_prime(P)), Primes).
+
+% Encuentra dos números primos que sumen un número par dado según la conjetura de Goldbach.
+goldbach(N, [P1, P2]) :- 
+    N > 2, 
+    N mod 2 =:= 0, 
+    prime_list(2, N, Primes), 
+    member(P1, Primes), 
+    P2 is N - P1, 
+    is_prime(P2).
+
+% Encuentra las composiciones de Goldbach para todos los números pares dentro de un rango.
+goldbach_list(Low, High, L) :- 
+    findall([N, P1, P2], 
+            (between(Low, High, N), 
+             N mod 2 =:= 0, 
+             goldbach(N, [P1, P2])), 
+            L).
+
+% Predicado main para ejecutar el programa y mostrar las composiciones de Goldbach en un rango.
+main :-
+    Low = 4, % Cambia estos valores según sea necesario
+    High = 20,
+    goldbach_list(Low, High, L),
+    format('Composiciones de Goldbach entre ~w y ~w: ~w~n', [Low, High, L]).
 

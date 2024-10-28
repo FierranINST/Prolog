@@ -36,7 +36,7 @@
 % }
 % ----------------------------------------------
 
-% -------- Código en Prolog --------------------
+% Encuentra los factores primos de un número entero positivo.
 prime_factors(N, L) :- N > 1, prime_factors(N, 2, L).
 
 prime_factors(1, _, []).
@@ -45,5 +45,12 @@ prime_factors(N, F, L) :- N > 1, F * F < N, next_factor(F, F1), prime_factors(N,
 
 next_factor(2, 3).
 next_factor(F, F1) :- F > 2, F1 is F + 2.
-% ----------------------------------------------
+
+main :-
+    Number = 2,  % Cambia este número según lo que desees calcular.
+    (   Number > 1
+    ->  prime_factors(Number, Factors),  % Asignar el resultado a Factors.
+        format('Los factores primos de ~d son: ~w~n', [Number, Factors])
+    ;   format('Por favor, proporciona un número mayor que 1.~n')
+    ).
 

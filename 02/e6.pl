@@ -32,6 +32,11 @@
 % Predicado palindrome(List) que verifica si la lista
 % List es un palíndromo.
 
+reverse_list([], Acc, Acc).
+reverse_list([H|T], Acc, R) :- reverse_list(T, [H|Acc], R).
+reverse_list(L, R) :- reverse_list(L, [], R).
+
+
 % Una lista es un palíndromo si es igual a su inversa.
 palindrome(L) :-
     reverse_list(L, L).

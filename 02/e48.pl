@@ -27,11 +27,20 @@
 % }
 % ----------------------------------------------
 
-% -------- Código en Prolog --------------------
-symmetric(nil).
-symmetric(t(_, L, R)) :- mirror(L, R).
+% Construye un árbol binario de búsqueda a partir de una lista de enteros.
+% Un árbol binario de búsqueda es un árbol en el cual, para cada nodo,
+% todos los elementos en el subárbol izquierdo son menores y en el subárbol derecho son mayores.
+construct([], nil).
+construct([X|Xs], T) :- construct(Xs, T1), add(X, T1, T).
 
-mirror(nil, nil).
-mirror(t(_, L1, R1), t(_, L2, R2)) :- mirror(L1, R2), mirror(R1, L2).
-% ----------------------------------------------
+% Añade un nodo a un árbol binario de búsqueda.
+add(X, nil, t(X, nil, nil)).
+add(X, t(Root, L, R), t(Root, NL, R)) :- X < Root, add(X, L, NL).
+add(X, t(Root, L, R), t(Root, L, NR)) :- X >= Root, add(X, R, NR).
 
+% Función main para construir un árbol binario de búsqueda a partir de una lista de enteros.
+main :-
+    % Lista de ejemplo.
+    List = [5, 3, 7, 2, 4, 6, 8],
+    construct(List, Tree),
+    format('El árbol binario de búsqueda construido a partir de ~w es: ~w~n', [List, Tree]).
